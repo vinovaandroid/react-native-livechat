@@ -98,18 +98,19 @@ class RNLiveChatModule(reactContext: ReactApplicationContext) : ReactContextBase
   @ReactMethod
   fun presentChat() {
     Thread(Runnable {
-      mContext.currentActivity?.runOnUiThread(Runnable{
+      mContext.currentActivity?.runOnUiThread {
+        mContext.currentActivity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         fullScreenChatWindowView.showChatWindow()
-      })
+      }
     }).start()
   }
-
   @ReactMethod
   fun hideChat() {
     Thread(Runnable {
-      mContext.currentActivity?.runOnUiThread(Runnable{
+      mContext.currentActivity?.runOnUiThread {
+        mContext.currentActivity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         fullScreenChatWindowView.hideChatWindow()
-      })
+      }
     }).start()
   }
 
